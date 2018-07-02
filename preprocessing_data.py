@@ -46,7 +46,7 @@ class DataProcessor(object):
         index = np.arange(0, len(teams_away),dtype=int)
         
         information["Team"] = information["Team"].replace({k:v for k,v in zip(teams_home,index)})
-        information["Opponent Team"] = information["Opponent Team"].replace({k:v for k,v in zip(teams_away,index)})
+        information["Opponent Team"] = information["Opponent Team"].replace({k:v for k,v in zip(teams_home,index)})
 
 
         df = information.to_csv("input.csv", encoding="utf-8", index=False)
