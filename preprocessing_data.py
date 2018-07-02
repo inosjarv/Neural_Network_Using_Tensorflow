@@ -25,7 +25,6 @@ class DataProcessor(object):
                                             "R": "R_own","Home Team":"Opponent Team", "S.1": "S_opp", "EX.1": "EX_opp", "EN.1": "EN_opp",
                                             "F.1": "F_opp", "I.1":"I_opp", "R.1": "R_opp", "Results": "Result"})
 
-
         information = home_info.append(away_info,ignore_index=True)
 
         information["Result"] = information["Result"].replace({'L':0, 'W':1})
@@ -40,14 +39,12 @@ class DataProcessor(object):
 
         information["Home Situation"] = home_situation
 
-        teams_home = information['Team'].drop_duplicates().values.tolist()
-        teams_away = information['Opponent Team'].drop_duplicates().values.tolist()
+        teams = information['Team'].drop_duplicates().values.tolist()
 
-        index = np.arange(0, len(teams_away),dtype=int)
+        index = np.arange(0, len(teams),dtype=int)
         
-        information["Team"] = information["Team"].replace({k:v for k,v in zip(teams_home,index)})
-        information["Opponent Team"] = information["Opponent Team"].replace({k:v for k,v in zip(teams_home,index)})
-
+        information["Team"] = information["Team"].replace({k:v for k,v in zip(teams,index)})
+        information["Opponent Team"] = information["Opponent Team"].replace({k:v for k,v in zip(teams,index)})
 
         df = information.to_csv("input.csv", encoding="utf-8", index=False)
 
